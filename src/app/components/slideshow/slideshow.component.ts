@@ -16,7 +16,7 @@ export class SlideshowComponent implements OnInit, AfterViewInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.movies)
+    // console.log(this.movies);
   }
 
   // Necesita primero renderizarse todo en el ngOnInit y luego traer la configuración del swipe para estructurarse correctamente
