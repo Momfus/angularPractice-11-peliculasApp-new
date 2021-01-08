@@ -6,7 +6,6 @@ import { PeliculasComponent } from './peliculas/peliculas.component';
 import { ComponentsModule } from '../components/components.module';
 
 
-
 @NgModule({
   declarations: [HomeComponent, BuscarComponent, PeliculasComponent],
   imports: [

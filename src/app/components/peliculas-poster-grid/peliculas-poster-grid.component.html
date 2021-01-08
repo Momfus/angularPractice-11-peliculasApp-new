@@ -9,7 +9,14 @@
       <div class="row">
         <!-- Puntaje estrellas -->
         <div class="col-10 text-white">
-          **********
+          <star-rating
+            [value]="movie.vote_average"
+            totalstars="10"
+            checkedcolor="yellow"
+            uncheckedcolor="gray"
+            size="14px"
+            readonly="false">
+          </star-rating>
         </div>
 
         <!-- Puntaje promedio -->
