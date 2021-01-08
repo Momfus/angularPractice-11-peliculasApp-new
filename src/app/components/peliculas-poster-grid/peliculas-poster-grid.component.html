@@ -1,6 +1,7 @@
 <div class="row">
   <div class="col-md-3 mb-5" *ngFor="let movie of movies">
 
+    <!-- Mostrar una imagen por defecto si la misma aun no esta cargada -->
     <img src="https://image.tmdb.org/t/p/w500/{{ movie.poster_path }}"
       class="img-fluid poster">
 
