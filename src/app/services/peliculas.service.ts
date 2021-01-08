@@ -48,4 +48,19 @@ export class PeliculasService {
 
   }
 
+  buscarPeliculas( texto: string ): Observable<Movie[]> {
+
+    // Se arma un objeto igual que params pero con página 1 y query de texto de buscar
+    const params = {...this.params, page: 1, query: texto};
+
+    return this.http.get<CarteleraResponse>(`${ this.baseUrl }/search/movie`,{
+      params // igual que params: params
+    }).pipe(
+      map(
+        res => res.results
+      )
+    );
+
+  }
+
 }

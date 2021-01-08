@@ -5,10 +5,20 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
       </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Buscar películas" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Buscar</button>
-      </form>
+
+      <!-- Al solo ser un solo campo, no hace falta tener que importar lo de form para usarlo -->
+      <div class="d-flex">
+        <input
+          #txtBuscar
+          (keyup.enter)="buscarPelicula( txtBuscar.value )"
+          class="form-control me-2"
+          type="search"
+          placeholder="Buscar películas"
+          aria-label="Search">
+        <button
+          (click)="buscarPelicula( txtBuscar.value )"
+          class="btn btn-outline-success" type="submit">Buscar</button>
+      </div>
     </div>
   </div>
 </nav>
