@@ -68,7 +68,7 @@ export class PeliculasService {
 
   }
 
-  getPeliculaDetalle( id: string ) {
+  getPeliculaDetalle( id: string ): Observable<MovieResponse> {
 
     return this.http.get<MovieResponse>(`${ this.baseUrl }/movie/${ id }`, {
       params: this.params
