@@ -4,6 +4,7 @@ import { PeliculasService } from '../../services/peliculas.service';
 import { MovieResponse } from '../../interfaces/movie-response';
 import { Location } from '@angular/common';
 import { Cast } from 'src/app/interfaces/credits-response';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-peliculas',
@@ -25,21 +26,27 @@ export class PeliculasComponent implements OnInit {
 
     const { id } = this.activatedRoute.snapshot.params;
 
-    this.peliculasService.getPeliculaDetalle( id ).subscribe( movie => {
-      // console.log(movie);
 
-      if ( !movie ) {
+    combineLatest([
+
+      this.peliculasService.getPeliculaDetalle( id ),
+      this.peliculasService.getCast( id )
+
+    ]).subscribe( ( [pelicula, cast] ) => {
+
+      // Para películas
+      if ( !pelicula ) {
         this.router.navigateByUrl('/home');
         return;
       }
 
-      this.pelicula = movie;
+      this.pelicula = pelicula;
+
+      // Para el cast
+      this.cast = cast.filter( actor => actor.profile_path != null ); // Se ignoran el cast que no tenga fotos
+
     });
 
-    this.peliculasService.getCast( id ).subscribe( cast => {
-      console.log(cast);
-      this.cast = cast.filter( actor => actor.profile_path != null ); // Se ignoran el cast que no tenga fotos
-    });
 
   }
 
