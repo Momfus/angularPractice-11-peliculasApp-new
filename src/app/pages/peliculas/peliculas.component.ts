@@ -13,7 +13,7 @@ import { Cast } from 'src/app/interfaces/credits-response';
 export class PeliculasComponent implements OnInit {
 
   public pelicula: MovieResponse;
-  public cast: Cast[];
+  public cast: Cast[] = [];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -38,7 +38,7 @@ export class PeliculasComponent implements OnInit {
 
     this.peliculasService.getCast( id ).subscribe( cast => {
       console.log(cast);
-      this.cast = cast;
+      this.cast = cast.filter( actor => actor.profile_path != null ); // Se ignoran el cast que no tenga fotos
     });
 
   }
