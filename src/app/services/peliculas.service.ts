@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { map, tap } from 'rxjs/operators'; // Tap ejecuta un código cada vez que hay el observable emite un cambio
+import { catchError, map, tap } from 'rxjs/operators'; // Tap ejecuta un código cada vez que hay el observable emite un cambio
 import { CarteleraResponse, Movie } from '../interfaces/cartelera-response';
 import { MovieResponse } from '../interfaces/movie-response';
+import { CreditsReponse, Cast } from '../interfaces/credits-response';
 
 
 @Injectable({
@@ -72,7 +73,20 @@ export class PeliculasService {
 
     return this.http.get<MovieResponse>(`${ this.baseUrl }/movie/${ id }`, {
       params: this.params
-    });
+    }).pipe(
+      catchError( err => of(null)) // Devuelve un observable falso para evitar el error de no tener el error de null
+    );
+
+  }
+
+  getCast( id: string ): Observable<Cast[]> {
+
+    return this.http.get<CreditsReponse>(`${ this.baseUrl }/movie/${ id }/credits`, {
+      params: this.params
+    }).pipe(
+      map( res => res.cast ),
+      catchError( err => of([]))
+    );
 
   }
 
