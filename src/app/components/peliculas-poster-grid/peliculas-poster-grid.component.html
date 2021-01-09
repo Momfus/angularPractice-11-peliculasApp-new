@@ -3,7 +3,8 @@
 
     <!-- Mostrar una imagen por defecto si la misma aun no esta cargada -->
     <img [src]="movie.poster_path | poster"
-      class="img-fluid poster">
+      class="img-fluid poster"
+      (click)="onMovieClick( movie )">
 
     <div>
       <h3>{{ movie.title }}</h3>

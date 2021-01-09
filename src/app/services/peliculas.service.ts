@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map, tap } from 'rxjs/operators'; // Tap ejecuta un código cada vez que hay el observable emite un cambio
 import { CarteleraResponse, Movie } from '../interfaces/cartelera-response';
+import { MovieResponse } from '../interfaces/movie-response';
 
 
 @Injectable({
@@ -64,6 +65,14 @@ export class PeliculasService {
         res => res.results
       )
     );
+
+  }
+
+  getPeliculaDetalle( id: string ) {
+
+    return this.http.get<MovieResponse>(`${ this.baseUrl }/movie/${ id }`, {
+      params: this.params
+    });
 
   }
 
